@@ -1,16 +1,19 @@
 function get_config()
 {
     fetch('/config')
-        .then(function (response) { return response.json() })
+        .then(function (response) { return response.json(); })
         .then(function (data)
         {
             for ( var key in data )
             {
-                var value = data[key];
-                console.log(key, value);
-                if ( document.getElementById(key) )
+                if ( data.hasOwnProperty(key) )
                 {
-                    document.getElementById(key).value = value;
+                    var value = data[key];
+                    console.log(key, value);
+                    if ( document.getElementById(key) )
+                    {
+                        document.getElementById(key).value = value;
+                    }
                 }
             }
         });
@@ -30,33 +33,35 @@ function post_netcfg(event)
         "wifi_host"
     ];
     var formData = new FormData();
-    for ( var i in formFields )
+    for ( var i = 0 ; i < formFields.length ; i ++ )
     {
         var elem = formFields[i];
         formData.append(elem, document.getElementById(elem).value);
     }
-    fetch('/config', {
+    fetch('/netconfig', {
         method: 'post',
         body: formData
     });
 }
 
-function post_rockcfg(event)
+function post_appcfg(event)
 {
     event.preventDefault();
     var formFields = [
-        "minHeight",
-        "maxHeight",
-        "homePosition",
-        "moveDelay"
+        "min_temp",
+        "max_temp",
+        "min_on",
+        "min_off",
+        "target_temp",
+        "threshold"
     ];
     var formData = new FormData();
-    for ( var i in formFields )
+    for ( var i = 0 ; i < formFields.length ; i ++ )
     {
         var elem = formFields[i];
         formData.append(elem, document.getElementById(elem).value);
     }
-    fetch('/rockconfig', {
+    fetch('/appconfig', {
         method: 'post',
         body: formData
     });
@@ -92,6 +97,6 @@ docReady( function()
     document.getElementById('form_netcfg').addEventListener('submit', post_netcfg);
     document.getElementById('netcfg_cancel').addEventListener('click', get_config);
     document.getElementById('netcfg_restart').addEventListener('click', restart_esp);
-    document.getElementById('form_rockcfg').addEventListener('submit', post_rockcfg);
-    document.getElementById('rockcfg_cancel').addEventListener('click', get_config);
+    document.getElementById('form_appcfg').addEventListener('submit', post_appcfg);
+    document.getElementById('appcfg_cancel').addEventListener('click', get_config);
 });

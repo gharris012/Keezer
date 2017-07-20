@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Rocker Configuration</title>
+    <title>App Configuration</title>
 
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="skeleton.css">
@@ -13,7 +13,7 @@
     <script src="config.js"></script>
 </head>
 <body>
-    <h4 class="u-text-center">Rocker</h4>
+    <h4 class="u-text-center">App</h4>
     <div class="container">
         <div class="row">
             <div class="one-half columns offset-by-one-half u-text-right">
@@ -22,78 +22,90 @@
             </div>
         </div>
 
-          <div class="row">
-              <div class="columns twelve">
-                  <h6 class="u-text-center">Network</h6>
-              </div>
-          </div>
-          <form id="form_netcfg" method="POST">
-              <div class="row">
-                  <div class="columns ten offset-by-two">
-                      <label for="wifi_ssid">SSID</label>
-                      <input type="text" id="wifi_ssid" name="wifi_ssid" class="form-control" placeholder="Enter SSID" value="">
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="columns ten offset-by-two">
-                      <label for="wifi_password">Password</label>
-                      <input type="password" id="wifi_password" name="wifi_password" class="form-control" placeholder="Password">
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="columns ten offset-by-two">
-                      <label for="wifi_host">Host Name</label>
-                      <input type="text" id="wifi_host" name="wifi_host" class="form-control" placeholder="Enter Host Name" value="">
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="columns ten offset-by-two">
-                    <button type="submit" class="button button-primary">Save Network</button>
-                    <button type="button" id="netcfg_cancel" class="button">Cancel</button>
-                    <button type="button" id="netcfg_restart" class="button" style="background-color: red; color: white">Restart</button>
+        <div class="row">
+            <div class="columns twelve">
+                <h6 class="u-text-center">Network</h6>
+            </div>
+        </div>
+        <form id="form_netcfg" method="POST">
+            <div class="row">
+                <div class="columns ten offset-by-two">
+                    <label for="wifi_ssid">SSID</label>
+                    <input type="text" id="wifi_ssid" name="wifi_ssid" class="form-control" placeholder="Enter SSID" value="">
                 </div>
             </div>
+            <div class="row">
+                <div class="columns ten offset-by-two">
+                    <label for="wifi_password">Password</label>
+                    <input type="password" id="wifi_password" name="wifi_password" class="form-control" placeholder="Password">
+                </div>
+            </div>
+            <div class="row">
+                <div class="columns ten offset-by-two">
+                    <label for="wifi_host">Host Name</label>
+                    <input type="text" id="wifi_host" name="wifi_host" class="form-control" placeholder="Enter Host Name" value="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="columns ten offset-by-two">
+                  <button type="submit" class="button button-primary">Save Network</button>
+                  <button type="button" id="netcfg_cancel" class="button">Cancel</button>
+                  <button type="button" id="netcfg_restart" class="button" style="background-color: red; color: white">Restart</button>
+              </div>
+          </div>
         </form>
 
         <h2>&nbsp;</h2>
 
         <div class="row">
             <div class="columns twelve">
-                <h6 class="u-text-center">Rocker</h6>
+                <h6 class="u-text-center">App Config</h6>
             </div>
         </div>
 
-        <form id="form_rockcfg" method="POST">
+        <form id="form_appcfg" method="POST">
             <div class="row">
                 <div class="columns ten offset-by-two">
-                    <label for="minHeight">Min Height</label>
-                    <input type="text" id="minHeight" name="minHeight" class="form-control" placeholder="Enter Min Height" value="">
+                    <label for="target_temp">Target Temperature</label>
+                    <input type="text" id="target_temp" name="target_temp" class="form-control" placeholder="Enter Target Temperature" value="">
                 </div>
             </div>
             <div class="row">
                 <div class="columns ten offset-by-two">
-            <label for="maxHeight">Max Height</label>
-            <input type="text" id="maxHeight" name="maxHeight" class="form-control" placeholder="Enter Max Height" value="">
-        </div>
-    </div>
-    <div class="row">
-        <div class="columns ten offset-by-two">
-            <label for="homePosition">Home Position</label>
-            <input type="text" id="homePosition" name="homePosition" class="form-control" placeholder="Enter Home Position" value="">
-        </div>
-    </div>
-    <div class="row">
-        <div class="columns ten offset-by-two">
-            <label for="moveDelay">Movement Delay</label>
-            <input type="text" id="moveDelay" name="moveDelay" class="form-control" placeholder="Enter Movement Delay" value="">
-        </div>
-    </div>
-    <div class="row">
-        <div class="columns ten offset-by-two">
-            <button type="submit" class="button button-primary">Save Config</button>
-            <button type="button" id="rockcfg_cancel" class="button">Cancel</button>
-        </div>
-    </div>
+                    <label for="threshold">Threshold</label>
+                    <input type="text" id="threshold" name="threshold" class="form-control" placeholder="Enter Threshold" value="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="columns ten offset-by-two">
+                    <label for="min_on">Minimum On Time</label>
+                    <input type="text" id="min_on" name="min_on" class="form-control" placeholder="Enter Min On Time" value="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="columns ten offset-by-two">
+                    <label for="min_off">Minimum Off Time</label>
+                    <input type="text" id="min_off" name="min_off" class="form-control" placeholder="Enter Min Off Time" value="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="columns ten offset-by-two">
+                    <label for="min_temp">Minimum Temperature</label>
+                    <input type="text" id="min_temp" name="min_temp" class="form-control" placeholder="Enter Min Temperature" value="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="columns ten offset-by-two">
+                    <label for="max_temp">Maximum Temperature</label>
+                    <input type="text" id="max_temp" name="max_temp" class="form-control" placeholder="Enter Max Temperature" value="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="columns ten offset-by-two">
+                    <button type="submit" class="button button-primary">Save Config</button>
+                    <button type="button" id="rockcfg_cancel" class="button">Cancel</button>
+                </div>
+            </div>
         </form>
     </div> <!-- /container -->
 </body>

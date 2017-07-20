@@ -1,0 +1,11 @@
+{
+  "wifi_host":"",
+  "wifi_ssid":"",
+  "wifi_password":"",
+  "min_temp":32,
+  "max_temp":55,
+  "target_temp":38,
+  "min_on":5,
+  "min_off":5,
+  "threshold":2
+}

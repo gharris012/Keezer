@@ -54,12 +54,12 @@ OneWire own(ownPin);
 const uint8_t ON = 1;
 const uint8_t OFF = 0;
 
-const uint8_t MAX_TEMPERATURE = 80;
-const uint8_t MIN_TEMPERATURE = 32;
+uint8_t MAX_TEMPERATURE = 80;
+uint8_t MIN_TEMPERATURE = 32;
 const uint8_t DEFAULT_TEMPERATURE = 38;
-const int keezer_min_on_time = 5*60000;
-const int keezer_min_off_time = 5*60000;
-const uint8_t keezer_temperature_threshold = 2; // +- 2 degrees
+int keezer_min_on_time = 5*60000;
+int keezer_min_off_time = 5*60000;
+uint8_t keezer_temperature_threshold = 2; // +- 2 degrees
 
 uint8_t keezer_target_temperature = 70;
 uint8_t keezer_state = OFF;
