@@ -1,0 +1,8 @@
+{
+  "wifi_ssid":"harbinger2",
+  "wifi_password":"bob",
+  "min":79,
+  "max":100,
+  "home":55,
+  "delay":40
+}
