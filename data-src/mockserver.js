@@ -59,6 +59,16 @@ app.route('/config').get(function(req, res) {
     res.json(nconf.get());
 });
 
+app.route('/target').get(function(req, res) {
+    res.json({"target_temp": nconf.get('target_temp')});
+});
+
+app.route('/target').post(function(req, res) {
+    nconf.set('target_temp', req.body.target_temp);
+    console.log(nconf.get('target_temp'));
+    res.json({"target_temp": nconf.get('target_temp')});
+});
+
 app.route('/hello').get(function (req, res)
 {
     res.send("<html><body><h1>Hello!</h1><p>Sincerely,<br>" + nconf.get('server').name + "</p></body></html>");

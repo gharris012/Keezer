@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>App Status</title>
+    <title>Keezer Status</title>
 
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="skeleton.css">
@@ -13,8 +13,9 @@
   </head>
 <script src="index.js"></script>
   <body>
-      <h4 class="u-text-center">App</h4>
+      <h4 class="u-text-center">Keezer</h4>
       <div class="container">
+        
           <div class="row">
               <div class="one-half columns offset-by-one-half u-text-right">
                   <a class="button button-primary" href="/">Status</a>
@@ -24,13 +25,15 @@
 
           <div class="row">
               <div class="columns twelve u-text-center">
-                  <button type="button" class="button button-primary" id="gobtn" autocomplete="off">Go</button>
+                  <button type="button" class="button button-primary" id="targetdown" autocomplete="off">-</button>
+                  <button type="button" class="button button-primary" id="targetup" autocomplete="off">+</button>
+                  <input type="text" id="target_temp" name="target_temp" class="form-control" placeholder="Enter Target Temperature" value="">
               </div>
           </div>
+          
           <div class="row">
               <div class="columns twelve u-text-center">
-                  <span>Run Time:</span>
-                  <span id="gotime"></span>
+                  <h2 id="current_temp">45</h2>
               </div>
           </div>
 
