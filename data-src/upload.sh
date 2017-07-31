@@ -2,8 +2,8 @@
 cd ../data
 
 keyfile="$PWD/.upload"
-#espurl="192.168.2.246/edit"
-espurl="esp_Rocker/edit"
+#espurl="192.168.2.61/edit"
+espurl="keezer/edit"
 #espurl="192.168.5.1/edit"
 
 for file in ../data/*.gz; do

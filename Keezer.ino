@@ -5,6 +5,9 @@
 #include <FS.h>
 #include <ArduinoJson.h>
 #include "button.h"
+extern "C" {
+#include <user_interface.h>
+}
 
 #include <OneWire.h>
 #include <SPI.h>
@@ -29,6 +32,8 @@
  *  15 - powerswitch tail (built-in pulldown)
  *
  */
+
+#include "keys.h"
 
 #ifdef WIFI_SSID
 String wifi_ssid = WIFI_SSID;
@@ -61,11 +66,13 @@ int keezer_min_on_time = 5*60000;
 int keezer_min_off_time = 5*60000;
 uint8_t keezer_temperature_threshold = 2; // +- 2 degrees
 
-uint8_t keezer_target_temperature = 70;
+uint8_t keezer_target_temperature = 37;
 uint8_t keezer_state = OFF;
 uint8_t keezer_pin = 15;
 uint8_t keezer_mode = MODE_AUTO;
 unsigned long int keezer_timer_last = 0;
+
+uint8_t last_resetReason = 0;
 
 const float INVALID_TEMPERATURE = -123;
 const byte DS_TEMP_SENSOR_CONVERT_DURATION = 250;
@@ -85,10 +92,11 @@ typedef struct DSTempSensor
     bool present;
 } DSTempSensor;
 
+// x28, 0xFF, 0xD5, 0x2B, 0xA0, 0x16, 0x5, 0xAF
 DSTempSensor ds_temp_sensor[DS_SENSOR_COUNT] = {
     {
         "Keezer",
-        {0x28, 0xFF, 0x63, 0x70, 0xA3, 0x16, 0x5, 0xAF},
+        {0x28, 0xFF, 0xD5, 0x2B, 0xA0, 0x16, 0x5, 0xAF},
         1, NULL,
         INVALID_TEMPERATURE, FALSE
     }
@@ -132,6 +140,9 @@ File fsUploadFile;
 
 void setup()
 {
+    rst_info *resetInfo;
+    resetInfo = ESP.getResetInfoPtr();
+
     Serial.begin(115200);
 
     pinMode(keezer_pin, OUTPUT);
@@ -139,7 +150,7 @@ void setup()
 
     delay(1000);
 
-    Serial.println("Keezer Controller v0.2");
+    Serial.println("Keezer Controller v0.4");
     // by default, we'll generate the high voltage from the 3.3v line internally! (neat!)
     display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3C (for the 128x32)
     display.setTextWrap(FALSE);
@@ -150,6 +161,10 @@ void setup()
     // internally, this will display the splashscreen.
     display.display();
     delay(1000);
+
+    Serial.print("Reset Reason: ");
+    Serial.println(resetInfo->reason);
+    last_resetReason = resetInfo->reason;
 
     scanOWN();
     // set resolution on all DS temp sensors
@@ -171,11 +186,14 @@ void setup()
     Serial.println("Setting up buttons");
     setup_buttons(buttons, BUTTON_COUNT);
 
+    setup_server();
+
     Serial.println("Ready");
 }
 
 void loop()
 {
+    server.handleClient();
     check_buttons(buttons, BUTTON_COUNT);
     if ( millis() > read_temperatures_next_time )
     {
@@ -332,6 +350,7 @@ void check_keezer()
     {
         Serial.print("Updating keezer state: ");
         Serial.println(state);
+        digitalWrite(keezer_pin, state);
         keezer_state = state;
         keezer_timer_last = millis();
     }

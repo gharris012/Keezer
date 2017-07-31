@@ -23,7 +23,7 @@ function docReady(callback) {
 
 docReady( function()
 {
-	get_target();
+	get_state();
     $('targetdown').addEventListener("click", function() {
         $('target_temp').value = Number.parseInt($('target_temp').value) - 1;
         set_target();
@@ -48,7 +48,32 @@ function set_target()
     fetch('/target', {
         method: 'post',
         body: formData
-    });
+    }).then(function (response) {
+        var data = response.json();
+        console.log("target response:", data);
+        return data;
+    }).then(function (data)
+        {
+            for ( var key in data )
+            {
+                if ( data.hasOwnProperty(key) )
+                {
+                    var value = data[key];
+                    console.log(key, value);
+                    if ( $(key) )
+                    {
+                        if ( $(key).tagName == 'INPUT' )
+                        {
+                            $(key).value = value;
+                        }
+                        else
+                        {
+                            $(key).innerHTML = value;
+                        }
+                    }
+                }
+            }
+        });
 }
 
 function $(inId)
@@ -56,12 +81,13 @@ function $(inId)
 	return document.getElementById(inId);
 }
 
-function get_target()
+function get_state()
 {
-	fetch('/target')
+	fetch('/state')
         .then(function (response) { return response.json(); })
         .then(function (data)
         {
+            console.log("got state");
             for ( var key in data )
             {
                 if ( data.hasOwnProperty(key) )

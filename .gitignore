@@ -2,3 +2,5 @@
 /data-src/node_modules
 /data-src/config.json
 /data-src/mockserver.config.json
+/data-src/.upload
+/data

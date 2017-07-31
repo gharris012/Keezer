@@ -1,16 +1,6 @@
 {
-  "name":"Mock",
-  "port":"",
-  "wifi_ssid":"",
-  "wifi_password":"",
-  "min":32,
-  "max":80,
-  "target":38,
-  "min_on":5,
-  "min_off":5,
-  "threshold":2,
-  "state":0,
   "server":{
+    "name":"Mock",
     "baseurl": "http://localhost:3001",
     "port": 3001
   }

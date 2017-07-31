@@ -54,7 +54,17 @@ void scanOWN()
         }
         if ( ! found )
         {
+            Serial.println();
             Serial.println("Not matched");
+            Serial.print("ROM = ");
+            Serial.print("0x");
+            Serial.print(addr[0],HEX);
+            for( i = 1; i < 8; i++ )
+            {
+                Serial.print(", 0x");
+                Serial.print(addr[i],HEX);
+            }
+            Serial.println();
         }
     }
     own.reset_search();
@@ -62,7 +72,7 @@ void scanOWN()
 
 void read_temperatures()
 {
-    Serial.println("Refreshing temperatures");
+    //Serial.println("Refreshing temperatures");
     own.reset();
     own.skip();
     own.write(0x44);
@@ -77,7 +87,7 @@ void read_temperatures()
 
 void read_ds_temperatures()
 {
-    Serial.println("Reading ds temperatures");
+    //Serial.println("Reading ds temperatures");
 
     byte i = 0;
     byte present_count = 0;
