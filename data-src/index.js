@@ -96,7 +96,15 @@ function get_state()
                     console.log(key, value);
                     if ( $(key) )
                     {
-                        $(key).value = value;
+                        if ( $(key).tagName == 'INPUT' )
+                        {
+                            $(key).value = value;
+                        }
+                        else
+                        {
+                            console.log(value);
+                            $(key).innerHTML = value;
+                        }
                     }
                 }
             }

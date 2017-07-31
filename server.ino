@@ -167,6 +167,7 @@ void setup_server()
     json += ",\"status\":" + String(keezer_state);
     json += ",\"last_reset\":" + String(last_resetReason);
     json += ",\"target_temp\":\"" + String(keezer_target_temperature) + "\"";
+    json += ",\"current_temp\":\"" + String(ds_temp_sensor[DS_KEEZER].tempF) + "\"";
     json += "}";
     server.send(200, "text/json", json);
     json = String();

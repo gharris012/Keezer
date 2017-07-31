@@ -150,7 +150,7 @@ void setup()
 
     delay(1000);
 
-    Serial.println("Keezer Controller v0.4");
+    Serial.println("Keezer Controller v0.5");
     // by default, we'll generate the high voltage from the 3.3v line internally! (neat!)
     display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3C (for the 128x32)
     display.setTextWrap(FALSE);
