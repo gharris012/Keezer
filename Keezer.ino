@@ -87,8 +87,8 @@ typedef struct DSTempSensor
 
 DSTempSensor ds_temp_sensor[DS_SENSOR_COUNT] = {
     {
-        "Keezer", // Fermenter 1
-        {0x28, 0xFF, 0x63, 0x70, 0xA3, 0x16, 0x3, 0x9},
+        "Keezer",
+        {0x28, 0xFF, 0x63, 0x70, 0xA3, 0x16, 0x5, 0xAF},
         1, NULL,
         INVALID_TEMPERATURE, FALSE
     }
@@ -139,7 +139,7 @@ void setup()
 
     delay(1000);
 
-    Serial.println("Keezer Controller v0.1");
+    Serial.println("Keezer Controller v0.2");
     // by default, we'll generate the high voltage from the 3.3v line internally! (neat!)
     display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3C (for the 128x32)
     display.setTextWrap(FALSE);

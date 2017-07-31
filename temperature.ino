@@ -13,6 +13,7 @@ void scanOWN()
 {
     uint8_t addr[8];
     byte i = 0;
+    bool found = FALSE;
 
     for ( i = 0 ; i < DS_SENSOR_COUNT ; i ++ )
     {
@@ -34,6 +35,7 @@ void scanOWN()
     // search own for sensors
     while(own.search(addr))
     {
+        found = FALSE;
         Serial.print("Found: ");
         Serial.print(addr[6], HEX);
         Serial.print("-");
@@ -47,7 +49,12 @@ void scanOWN()
                 Serial.print(" at index ");
                 Serial.println(i);
                 ds_temp_sensor[i].present = TRUE;
+                found = TRUE;
             }
+        }
+        if ( ! found )
+        {
+            Serial.println("Not matched");
         }
     }
     own.reset_search();
