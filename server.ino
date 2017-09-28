@@ -165,9 +165,11 @@ void setup_server()
     String json = "{";
     json += "\"heap\":" + String(ESP.getFreeHeap());
     json += ",\"status\":" + String(keezer_state);
+    json += ",\"since\":" + String(keezer_timer_last);
     json += ",\"last_reset\":" + String(last_resetReason);
     json += ",\"target_temp\":\"" + String(keezer_target_temperature) + "\"";
     json += ",\"current_temp\":\"" + String(ds_temp_sensor[DS_KEEZER].tempF) + "\"";
+    json += ",\"uptime\":" + String(millis());
     json += "}";
     server.send(200, "text/json", json);
     json = String();

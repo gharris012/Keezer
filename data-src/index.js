@@ -32,6 +32,7 @@ docReady( function()
         $('target_temp').value = Number.parseInt($('target_temp').value) + 1;
         set_target();
     });
+    window.setInterval(get_state, 10000);
 });
 
 function set_target()
@@ -81,6 +82,27 @@ function $(inId)
 	return document.getElementById(inId);
 }
 
+// from https://stackoverflow.com/a/11486026
+function fancyTimeFormat(time)
+{
+    time = ~~(time);
+    // Hours, minutes and seconds
+    var hrs = ~~(time / 3600);
+    var mins = ~~((time % 3600) / 60);
+    var secs = time % 60;
+
+    // Output like "1:01" or "4:03:59" or "123:03:59"
+    var ret = "";
+
+    if (hrs > 0) {
+        ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+    }
+
+    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+    ret += "" + secs;
+    return ret;
+}
+
 function get_state()
 {
 	fetch('/state')
@@ -100,9 +122,20 @@ function get_state()
                         {
                             $(key).value = value;
                         }
+                        else if ( key == 'status' )
+                        {
+                            $(key).innerHTML = ( value ? 'On' : 'Off' );
+                        }
+                        else if ( key == 'uptime' )
+                        {
+                            $(key).innerHTML = fancyTimeFormat(value/1000);
+                        }
+                        else if ( key == 'since' )
+                        {
+                            $(key).innerHTML = fancyTimeFormat(value/1000);
+                        }
                         else
                         {
-                            console.log(value);
                             $(key).innerHTML = value;
                         }
                     }

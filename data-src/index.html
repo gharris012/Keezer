@@ -15,7 +15,7 @@
   <body>
       <h4 class="u-text-center">Keezer</h4>
       <div class="container">
-        
+
           <div class="row">
               <div class="one-half columns offset-by-one-half u-text-right">
                   <a class="button button-primary" href="/">Status</a>
@@ -30,11 +30,21 @@
                   <input type="text" id="target_temp" name="target_temp" class="form-control" placeholder="Enter Target Temperature" value="">
               </div>
           </div>
-          
+
           <div class="row">
               <div class="columns twelve u-text-center">
                   <h2 id="current_temp">45</h2>
               </div>
+          </div>
+
+          <div class="row" style="font-size:smaller;">
+              <div class="six columns">&nbsp;</div>
+              <div class="one column">Status: </div>
+              <div class="one column" id="status">off</div>
+              <div class="one column">Since: </div>
+              <div class="one column" id="since">00:00:00</div>
+              <div class="one column">Uptime: </div>
+              <div class="one column" id="uptime">00:00:00</div>
           </div>
 
       </div> <!-- /container -->
